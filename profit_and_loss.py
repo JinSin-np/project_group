@@ -39,7 +39,7 @@ def profit_deficit_calculator():
     # Checks if net profit is always increasing
     if profit_deficit_days == []:
         # returns the day with the highest amount increment
-        return max(change_in_net_profit, key=[1])
+        return max(change_in_net_profit, key=lambda x: x[1])
 
 print(profit_deficit_calculator())
 

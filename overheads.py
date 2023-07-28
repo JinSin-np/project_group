@@ -18,3 +18,27 @@ with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         #and append the salesRecords list
         overheadRecords.append([row[0],row[1],row[3]])
 print(overheadRecords)
+
+# Create a dictionary to store the total overhead for each category
+overheadCategories = {}
+
+# Calculate total overhead for each category
+for record in overheadRecords:
+    category = record[1]
+    amount = float(record[2])
+    if category in overheadCategories:
+        overheadCategories[category] += amount
+    else:
+        overheadCategories[category] = amount
+
+# Find the category with the highest overhead
+highest_overhead_category = max(overheadCategories, key=overheadCategories.get)
+
+# Print the results
+print("Overhead Categories and Total Overheads:")
+for category, total_overhead in overheadCategories.items():
+    print(f"{category}: {total_overhead}")
+
+print("Highest Overhead Category:")
+print(highest_overhead_category)
+

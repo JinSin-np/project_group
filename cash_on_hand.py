@@ -18,49 +18,65 @@ with fp.open(mode="r", encoding="UTF-8", newline="") as file:
 
 # print(Cash_on_hand)
 
-# max_increase = 0
-# max_increase_day = 0
-
-# for i in range(1, len(Cash_on_hand)):
-#     previous_cash = Cash_on_hand[i - 1][1]
-#     current_cash = Cash_on_hand[i][1]
-#     increase = current_cash - previous_cash
-#     if increase > max_increase:
-#         max_increase = increase
-#         max_increase_day = int(Cash_on_hand[i][0])
-# print(f"The day with the highest increase is Day {max_increase_day} with an increase of ${max_increase}")
-
-# first_amount = Cash_on_hand[0][1]
-# last_amount = Cash_on_hand[-1][1]
-
-# if last_amount > first_amount:
-#     print("The amount has been increasing in general.")
-# elif last_amount < first_amount:
-#     print("The amount has been decreasing in general.")
-# else:
-#     print("The amount has not changed in general.")
-
-
-increasing_days = []
-decreasing_days = []
-
 # Convert the amount data to a list of integers
 amounts = [int(item[1]) for item in Cash_on_hand]
 
-# Check for increasing and decreasing days
+increasing_period = []
+decreasing_period = []
+
+# Check for increasing and decreasing periods
+current_trend = None
+current_period = []
+
 for i in range(1, len(amounts)):
     if amounts[i] > amounts[i - 1]:  # If amount increased from previous day
-        increasing_days.append(int(Cash_on_hand[i][0]))
+        if current_trend == "increasing":
+            current_period.append(int(Cash_on_hand[i][0]))
+        else:
+            if current_period:
+                increasing_period.append(current_period)
+            current_trend = "increasing"
+            current_period = [int(Cash_on_hand[i][0])]
     elif amounts[i] < amounts[i - 1]:  # If amount decreased from previous day
-        decreasing_days.append(int(Cash_on_hand[i][0]))
+        if current_trend == "decreasing":
+            current_period.append(int(Cash_on_hand[i][0]))
+        else:
+            if current_period:
+                decreasing_period.append(current_period)
+            current_trend = "decreasing"
+            current_period = [int(Cash_on_hand[i][0])]
+
+# Append the last period
+if current_trend == "increasing":
+    increasing_period.append(current_period)
+elif current_trend == "decreasing":
+    decreasing_period.append(current_period)
 
 # Output the results
-if increasing_days:
-    print("The amount has been increasing on days:", increasing_days)
-else:
-    print("There is no increasing day.")
+# for period in increasing_period:
+#     print(f"Day {period[0]} to {period[-1]}: Increase in cash surplus")
 
-if decreasing_days:
-    print("The amount has been decreasing on days:", decreasing_days)
-else:
-    print("There is no decreasing day.")
+# for period in decreasing_period:
+#     print(f"Day {period[0]} to {period[-1]}: Decrease in cash surplus")
+
+def
+max_increase = 0
+max_increase_day = 0
+
+for i in range(1, len(Cash_on_hand)):
+    previous_cash = Cash_on_hand[i - 1][1]
+    current_cash = Cash_on_hand[i][1]
+    increase = current_cash - previous_cash
+    if increase > max_increase:
+        max_increase = increase
+        max_increase_day = int(Cash_on_hand[i][0])
+print(f"Day: {max_increase_day}, AMOUNT: USD{max_increase}")
+
+
+
+
+
+
+
+
+

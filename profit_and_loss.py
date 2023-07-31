@@ -40,9 +40,11 @@ def profit_deficit_calculator():
     if profit_deficit_days == []:
         # returns the day with the highest amount increment
         return max(change_in_net_profit, key=lambda x: x[1])
+    
+    # Returns days where profit is in a deficit
+    return profit_deficit_days
 
 print(profit_deficit_calculator())
-
 
 
 

@@ -15,23 +15,9 @@ with fp.open(mode="r", encoding="UTF-8", newline="") as file:
     for row in reader:
         #get the day, items and profit for each record
         #and append the salesRecords list
-        Cash_on_hand.append([row[0],int(row[4])])
+        Cash_on_hand.append([row[0],int(row[1])])
 
-def find_deficits(Cash_on_hand):
-    deficits = []
-    for day in range(1, len(Cash_on_hand)):
-        previous_cash = Cash_on_hand[day - 1][1]
-        current_cash = Cash_on_hand[day][1]
-        deficit = previous_cash - current_cash
-
-        if previous_cash > current_cash:
-            day = int(Cash_on_hand[day][0])
-            deficits.append((day, deficit))
-
-    # for day, deficit in deficits:
-        print(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}")
-
-# find_deficits(Cash_on_hand)
+print(Cash_on_hand)
 
 def print_cash_deficit(data):
     if len(data) < 2:
@@ -44,8 +30,13 @@ def print_cash_deficit(data):
         if cash < prev_cash:
             deficit = prev_cash - cash
             print(f"[CASH DEFICIT] DAY: {next_day}, AMOUNT: {deficit}")
-
         prev_cash = cash
+        # elif prev_cash > cash:
+        #     print(f"CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY")
+            # print(f"[HIGHEST CASH SURPLUS] DAY: {}, AMOUNT: {}")
+
+
+
 
 print_cash_deficit(Cash_on_hand)
 

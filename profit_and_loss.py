@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 
 # create a file to csv file.
-fp = Path.cwd()/"profit-and-loss.csv"
+fp = Path.cwd()/"Net-Profit.csv"
 with fp.open(mode="r", encoding="UTF-8", newline="") as file:
     reader = csv.reader(file)
     next(reader) # skip header
@@ -14,7 +14,7 @@ with fp.open(mode="r", encoding="UTF-8", newline="") as file:
     for row in reader:
         #get the day, items and profit for each record
         #and append the salesRecords list
-        PandL_Record.append([row[0],int(row[4])])
+        PandL_Record.append([row[0],float(row[1])])
 
 def profit_deficit_calculator():
     '''

@@ -24,37 +24,28 @@ def find_deficits(Cash_on_hand):
         current_cash = Cash_on_hand[day][1]
         deficit = previous_cash - current_cash
 
-        if deficit > current_cash:
+        if previous_cash > current_cash:
             day = int(Cash_on_hand[day][0])
             deficits.append((day, deficit))
 
     # for day, deficit in deficits:
         print(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}")
 
-find_deficits(Cash_on_hand)
+# find_deficits(Cash_on_hand)
 
-def bob(Cash_on_hand):
-    final_amount = []
-    for day in range(1, len(Cash_on_hand)):
-        previous_cash = Cash_on_hand[day - 1][1]
-        current_cash = Cash_on_hand[day][1]
-        amount = previous_cash - current_cash
+def print_cash_deficit(data):
+    if len(data) < 2:
+        return
 
-        if amount > 0:
-            day = int(Cash_on_hand[day][0])
-            final_amount.append((day, amount))
-        
-        print(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {amount}")
+    # Initialize prev_cash with the first day's cash amount
+    day, prev_cash = data[0]
 
-#         elif current_cash > amount:
-#             highest_amount = current_cash
-#             highest_amount_day = int(Cash_on_hand[day][0])
-#             print("Cash surplus is higher every day")
-#     # if highest_amount_day > 0:
-#             print(f"Highest cash amount: USD{highest_amount} on DAY: {highest_amount_day}")
+    for next_day, cash in data[1:]:
+        if cash < prev_cash:
+            deficit = prev_cash - cash
+            print(f"[CASH DEFICIT] DAY: {next_day}, AMOUNT: {deficit}")
 
-# bob(Cash_on_hand)
+        prev_cash = cash
 
-
-
+print_cash_deficit(Cash_on_hand)
 

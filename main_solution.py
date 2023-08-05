@@ -20,9 +20,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-import mod_1
-import mod_2
-
-print(mod_1.underline("Hello World", "*"))
-print(mod_2.add(18,28))

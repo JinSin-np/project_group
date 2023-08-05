@@ -7,8 +7,8 @@ def read_file(cash_on_hand):
         content = file.read()
         return content
 
-def write_output(output, output_filename):
-    with open(output_filename, 'a') as file:
+def write_output(output, output_cash_on_hand):
+    with open(output_cash_on_hand, 'a') as file:
         file.write(output)
 
 if __name__ == "__main__":

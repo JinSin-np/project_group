@@ -1,4 +1,4 @@
-import sys
+import cash_on_hand
 
 def some_function():
     # Replace this with your desired function or code that produces some output

@@ -3,49 +3,51 @@ import csv
 
 
 # create a file to csv file.
-fp = Path.cwd()/"COH.csv"
-with fp.open(mode="r", encoding="UTF-8", newline="") as file:
-    reader = csv.reader(file)
-    next(reader) # skip header
+def COH_data_reader():
+    fp = Path.cwd()/"COH.csv"
+    with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+        reader = csv.reader(file)
+        next(reader) # skip header
 
-    # create an empty lists to store time sheet and Profit and Loss record
-    Cash_on_hand = [] 
+        # create an empty lists to store time sheet and Profit and Loss record
+        global Cash_on_hand
+        Cash_on_hand = [] 
 
-    # append time sheet and profit and loss record into the PandL_Records list
-    for row in reader:
-        #get the day, items and profit for each record
-        #and append the salesRecords list
-        Cash_on_hand.append([row[0],int(row[4])])
+        # append time sheet and profit and loss record into the Cash_on_hand list
+        for row in reader:
+            #get the day, items and profit for each record
+            #and append the salesRecords list
+            Cash_on_hand.append([row[0],int(row[4])])
+    return Cash_on_hand
 
-def find_deficits(Cash_on_hand):
-    deficits = []
-    for day in range(1, len(Cash_on_hand)):
-        previous_cash = Cash_on_hand[day - 1][1]
-        current_cash = Cash_on_hand[day][1]
-        deficit = previous_cash - current_cash
 
-        if previous_cash > current_cash:
-            day = int(Cash_on_hand[day][0])
-            deficits.append((day, deficit))
+def print_cash_deficit():
 
-    # for day, deficit in deficits:
-        print(f"[CASH DEFICIT] DAY: {day}, AMOUNT: {deficit}")
+    COH_data_reader()
 
-# find_deficits(Cash_on_hand)
+ # variables to store cash
+    change_in_cash = []
+    cash_deficit_days = []
+    largest_surplus = []
 
-def print_cash_deficit(data):
-    if len(data) < 2:
-        return
+    # Calculates the daily change in cash and appends it to change_in_cash list
+    for day,profit in enumerate(Cash_on_hand[1:],start=1):
+        net_profit_change = profit[1] - Cash_on_hand[day - 1][1]
+        change_in_cash.append([day, net_profit_change])
 
-    # Initialize prev_cash with the first day's cash amount
-    day, prev_cash = data[0]
+    # Finds the days where cash is lower than the previous day and appends it to profit_deficit_days list
+    for item in change_in_cash:
+        if item[1] < 0:
+            cash_deficit_days.append(item)
 
-    for next_day, cash in data[1:]:
-        if cash < prev_cash:
-            deficit = prev_cash - cash
-            print(f"[CASH DEFICIT] DAY: {next_day}, AMOUNT: {deficit}")
+    # Checks if cash is always increasing
+    if cash_deficit_days == []:
+        # returns the day with the highest amount increment
+        largest_surplus.append([max(change_in_cash, key=lambda x: x[1])])
+        return largest_surplus
+    
+    # Returns days where profit is in a deficit
+    return (cash_deficit_days)
+    
 
-        prev_cash = cash
-
-print_cash_deficit(Cash_on_hand)
 

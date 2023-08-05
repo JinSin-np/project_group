@@ -1,22 +1,23 @@
-import cash_on_hand
+def read_file(cash_on_hand):
+    with open(cash_on_hand, 'r') as file:
+        content = file.read()
+        return content
 
-def some_function():
-    # Replace this with your desired function or code that produces some output
-    return "Hello, World!"
-
-def main():
-    # Redirecting the standard output to a text file
-    with open('output.txt', 'w') as f:
-        sys.stdout = f  # Redirect standard output to the file
-
-        # Call your function or code here that produces the output
-        result = some_function()
-
-        # Printing the output to the file
-        print(result)
-
-        # Resetting the standard output to its default value (terminal)
-        sys.stdout = sys.__stdout__
+def write_output(output, output_filename):
+    with open(output_filename, 'a') as file:
+        file.write(output)
 
 if __name__ == "__main__":
-    main()
+    input_filenames = ["input1.txt", "input2.txt"]
+    output_filename = "output.txt"
+
+    # Initialize an empty string to store the concatenated output
+    concatenated_output = ""
+
+    # Read data from input files and concatenate them
+    for filename in input_filenames:
+        input_data = read_file(filename)
+        concatenated_output += input_data
+
+    # Write the concatenated output to a text file
+    write_output(concatenated_output, output_filename)

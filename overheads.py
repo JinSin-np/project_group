@@ -36,6 +36,6 @@ def largest_overheads():
 
     # Find the category with the highest overhead
     highest_overhead_category = max(overheadCategories, key=overheadCategories.get)
-
-    return highest_overhead_category
+    highest_percentage = round((overheadCategories[highest_overhead_category] / sum(overheadCategories.values())) * 100,2)
+    return highest_overhead_category, highest_percentage
 

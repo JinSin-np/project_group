@@ -17,7 +17,7 @@ def COH_data_reader():
         for row in reader:
             #get the day, items and profit for each record
             #and append the salesRecords list
-            Cash_on_hand.append([row[0],int(row[4])])
+            Cash_on_hand.append([row[0],int(row[1])])
     return Cash_on_hand
 
 
@@ -31,9 +31,9 @@ def print_cash_deficit():
     largest_surplus = []
 
     # Calculates the daily change in cash and appends it to change_in_cash list
-    for day,profit in enumerate(Cash_on_hand[1:],start=1):
-        net_profit_change = profit[1] - Cash_on_hand[day - 1][1]
-        change_in_cash.append([day, net_profit_change])
+    for day,cash in enumerate(Cash_on_hand[1:],start=1):
+        cash_change = cash[1] - Cash_on_hand[day - 1][1]
+        change_in_cash.append([day, cash_change])
 
     # Finds the days where cash is lower than the previous day and appends it to profit_deficit_days list
     for item in change_in_cash:

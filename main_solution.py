@@ -7,7 +7,7 @@ if text_file.exists() == False:
     # creates files if it doesnt exist
     text_file.touch()
 with text_file.open(mode="w") as file:
-    file.write(f"[HIGHEST OVERHEAD] {overheads.highest_overhead_category()[0]}: {overheads.highest_overhead_category()[1]}%")
+    file.write(f"[HIGHEST OVERHEAD] {overheads.largest_overheads()[0]}: {overheads.largest_overheads()[1]}%")
     if cash_on_hand.print_cash_deficit()[0][1] > 0:
         file.write("\n[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY")
         file.write(f"\n[HIGHEST CASH SURPLUSH] DAY: {cash_on_hand.print_cash_deficit()[0]}, AMOUNT: USD{cash_on_hand.print_cash_deficit()[1]}")

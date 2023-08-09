@@ -45,7 +45,7 @@ def print_cash_deficit(data):
         if cash < prev_cash: # if previous day cash is less than current day cash print the following line
             deficit = prev_cash - cash
             print(f"[CASH DEFICIT] DAY: {next_day}, AMOUNT: {deficit}")
-        prev_cash = cash
+        prev_cash = cash #
         # elif prev_cash > cash: # if previous day cash is more than current day cash print the following line
         #     print(f"CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY")
             # print(f"[HIGHEST CASH SURPLUS] DAY: {}, AMOUNT: {}")

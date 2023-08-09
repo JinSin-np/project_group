@@ -1,6 +1,7 @@
 from pathlib import Path
 import cash_on_hand, overheads, profit_and_loss
 
+# create a text file named as "summaryReport"
 text_file = Path.cwd()/"summaryReport.txt"
 # Checks if file exists
 if text_file.exists() == False:

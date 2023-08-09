@@ -2,19 +2,22 @@ from pathlib import Path
 import csv
 
 # create a file to csv file.
-fp = Path.cwd()/"Net-Profit.csv"
-with fp.open(mode="r", encoding="UTF-8", newline="") as file:
-    reader = csv.reader(file)
-    next(reader) # skip header
+def profit_and_loss_file_reader():
+    fp = Path.cwd()/"Net-Profit.csv"
+    with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+        reader = csv.reader(file)
+        next(reader) # skip header
 
-    # create an empty lists to store time sheet and Profit and Loss record
-    PandL_Record = [] 
+        global PandL_Record
+        # create an empty lists to store time sheet and Profit and Loss record
+        PandL_Record = [] 
 
-    # append time sheet and profit and loss record into the PandL_Records list
-    for row in reader:
-        #get the day, items and profit for each record
-        #and append the salesRecords list
-        PandL_Record.append([row[0],float(row[1])])
+        # append time sheet and profit and loss record into the PandL_Records list
+        for row in reader:
+            #get the day, items and profit for each record
+            #and append the salesRecords list
+            PandL_Record.append([row[0],float(row[1])])
+    return PandL_Record
 
 def profit_deficit_calculator():
     '''
@@ -23,8 +26,13 @@ def profit_deficit_calculator():
     required parameters: None
     '''
     # List to store values
+
+    # calls function to read Net-Profit file
+    profit_and_loss_file_reader()
+    
     change_in_net_profit = []
     profit_deficit_days = []
+    largest_surplus = []
 
     # Calculates the daily change in net profit and appends it to change_in_net_profit list
     for day,profit in enumerate(PandL_Record[1:],start=1):
@@ -39,12 +47,13 @@ def profit_deficit_calculator():
     # Checks if net profit is always increasing
     if profit_deficit_days == []:
         # returns the day with the highest amount increment
-        return max(change_in_net_profit, key=lambda x: x[1])
+        largest_surplus.append([max(change_in_net_profit, key=lambda x: x[1])])
+        return largest_surplus
     
     # Returns days where profit is in a deficit
-    return profit_deficit_days
+    return (profit_deficit_days)
+    
 
-print(profit_deficit_calculator())
 
 
 

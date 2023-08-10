@@ -4,6 +4,10 @@ import csv
 
 # create a file to csv file.
 def COH_data_reader():
+    '''
+    Function reads COH.csv file and appends data to a list
+    No parameters needed
+    '''
     fp = Path.cwd()/"COH.csv"
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file)
@@ -22,7 +26,8 @@ def COH_data_reader():
 
 def print_cash_deficit():
     """
-    
+    Function to calculate cash deficit days or highest cash surplus day
+    No parameters required
     """
 
     COH_data_reader() #calls function to read COH file
@@ -32,26 +37,21 @@ def print_cash_deficit():
     cash_deficit_days = []
     largest_surplus = []
 
-print(Cash_on_hand)
+    for day,cash in enumerate(Cash_on_hand[1:],start=1):
+            cash_change = cash[1] - Cash_on_hand[day - 1][1]
+            change_in_cash.append([day, cash_change])
 
-def print_cash_deficit(data):
-    if len(data) < 2: # checks if the length of the data list is less than 2
-        return
+        # Finds the days where cash is lower than the previous day and appends it to profit_deficit_days list
+    for item in change_in_cash:
+            if item[1] < 0:
+                cash_deficit_days.append(item)
+        # Checks if cash is always increasing
+    if cash_deficit_days == []:
+            # returns the day with the highest amount increment
+            largest_surplus.append([max(change_in_cash, key=lambda x: x[1])])
+            return largest_surplus
+        
+        # Returns days where profit is in a deficit
+    return (cash_deficit_days)
 
-    # Initialize prev_cash with the first day's cash amount
-    day, prev_cash = data[0] # assigns the first day and cash amount to variables
-
-    for next_day, cash in data[1:]: # loops through the data list starting from the second element
-        if cash < prev_cash: # if previous day cash is less than current day cash print the following line
-            deficit = prev_cash - cash
-            print(f"[CASH DEFICIT] DAY: {next_day}, AMOUNT: {deficit}")
-        prev_cash = cash #
-        # elif prev_cash > cash: # if previous day cash is more than current day cash print the following line
-        #     print(f"CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY")
-            # print(f"[HIGHEST CASH SURPLUS] DAY: {}, AMOUNT: {}")
-
-
-
-
-print_cash_deficit(Cash_on_hand)
 

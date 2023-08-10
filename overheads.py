@@ -1,6 +1,10 @@
 from pathlib import Path
 import csv
 def overheads_path_reader():
+    '''
+    Function to read overheads.csv file and appends data
+    No parameters required
+    '''
 # create a file to csv file.
     fp = Path.cwd()/"overheads.csv"
 
@@ -21,6 +25,9 @@ def overheads_path_reader():
         return overheadRecords
 
 def largest_overheads():
+    '''
+    Function to calculate the largest overhead and its percentage
+    '''
     # Create a dictionary to store the total overhead for each category
     overheads_path_reader()
     overheadCategories = {}

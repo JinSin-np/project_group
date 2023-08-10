@@ -3,6 +3,10 @@ import csv
 
 # create a file to csv file.
 def profit_and_loss_file_reader():
+    '''
+    Function to read overheads.csv file and appends data
+    No parameters required
+    '''
     fp = Path.cwd()/"Net-Profit.csv"
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file)
@@ -21,8 +25,7 @@ def profit_and_loss_file_reader():
 
 def profit_deficit_calculator():
     '''
-    Calculates the change in net profit then returns the days where the net profit is lower than the previous day as a list (returns change as a negeative number).
-    if the net profit is always increasing, returns the day with the highest amount increment (returns change as a positive number)
+    Calculates the profit deficit days or highest profit surplus day
     required parameters: None
     '''
     # List to store values

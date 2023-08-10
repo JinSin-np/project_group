@@ -20,4 +20,4 @@ with text_file.open(mode="w") as file:
         file.write(f"\n[HIGHEST PROFIT SURPLUSH] DAY: {profit_and_loss.profit_deficit_calculator()[0]}, AMOUNT: USD{profit_and_loss.profit_deficit_calculator()[1]}")
     else:
         for day in profit_and_loss.profit_deficit_calculator():
-            file.write(f"\n[PROFIT DEFICIT] DAY: {day[0]}, AMOUNT: USD{day[1] * -1}") 
+            file.write(f"\n[PROFIT DEFICIT] DAY: {day[0]}, AMOUNT: USD{day[1] * -1}")

@@ -8,7 +8,7 @@ def COH_data_reader():
     Function reads COH.csv file and appends data to a list
     No parameters needed
     '''
-    fp = Path.cwd()/"project_group"/"csv_reports"/"cash_on_hand.csv"
+    fp = Path.cwd()/"csv_reports"/"cash_on_hand.csv"
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file)
         next(reader) # skip header

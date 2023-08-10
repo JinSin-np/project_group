@@ -7,7 +7,7 @@ def profit_and_loss_file_reader():
     Function to read overheads.csv file and appends data
     No parameters required
     '''
-    fp = Path.cwd()/"project_group"/"csv_reports"/"profit_and_loss.csv"
+    fp = Path.cwd()/"csv_reports"/"profit_and_loss.csv"
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file)
         next(reader) # skip header
